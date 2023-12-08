@@ -1,0 +1,89 @@
+{% extends 'Employee_Dashboard/dashboard_base.html' %} 
+{% block EmployeeDashboard %} 
+{% load static %}
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+<link rel="canonical" href="https://demo-basic.adminkit.io/ui-forms.html" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+  rel="stylesheet"
+/>
+<div class="wrapper">
+  <div class="main">
+    <main class="content">
+      <div class="container-fluid p-0">
+        <div class="mb-3">
+          <h1 class="h3 d-inline align-middle">Формы заданий</h1>
+        </div>
+
+        <form action="{% url 'nadd-task' %}" method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Описание</h5>
+                </div>
+                <div class="card-body">
+                  <input type="textarea"
+                    class="form-control"
+                    placeholder="Опишите свою задачу здесь"
+                    name="description"
+                    value="{{description}}" required
+                  />
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Тип задачи</h5>
+                </div>
+                <div class="card-body">
+                  <select class="form-select mb-3" name="type" required>
+                    <option selected disabled>Выбирите</option>
+                    <option value="Break">Перерыв</option>
+                    <option value="Meeting">Встреча</option>
+                    <option value="Work">Работа</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Дата и время</h5>
+                </div>
+                <div class="card-body">
+                  <input type="datetime-local" value="{{Datetime}}" max="{{maxdate}}"name="datetime" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Затраченное время</h5>
+                </div>
+                <div class="card-body">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name = "time"
+                    value="time"
+                    placeholder="Затраченное время (в минутах)" required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <input type="submit" class="btn btn-primary" value="ДОБАВИТЬ ЗАДАЧУ" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</div>
+
+{% endblock EmployeeDashboard %}

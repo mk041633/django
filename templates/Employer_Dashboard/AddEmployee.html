@@ -1,0 +1,123 @@
+{% extends 'Employer_Dashboard/Dashboard_Base.html' %}
+{% block AdminDashboard %}
+{% load static %}
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-primary text-white me-2">
+      <i class="mdi mdi-account-multiple-plus "></i>
+    </span> Добавить сотрудника
+  </h3>
+</div>
+
+<div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Форма сотрудника</h4>
+      <form class="form-sample" action="{% url 'nadd-employee' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Имя пользователя</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Имя пользователя" name="Имя пользователя"
+                  id="UserNameField" required />
+                <div class="FeedbackArea text-sm  invalid_feedback invalid-feedback" style="display:none"></div>
+                <p class="text-sm text-success usernameSuccessOutput"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Контактный номер</label>
+              <div class="col-sm-9">
+                <input type="text" validate name="number" pattern="[0-9]{10}" id="number" class="form-control" title="Please enter a 10-digit number" placeholder="Контактный номер" required />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Пароль</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" placeholder="Пароль" name="password" id="PasswordField"
+                  required />
+
+                <small class="showPasswordToggle"
+                  style="cursor:pointer; float: right; font-size: 11px; padding-top: 4px;">Показать</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Дата вступления</label>
+              <div class="col-sm-9">
+                <input type="date" name="date" id="date" class="form-control" required />
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Возраст</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" placeholder="Возраст" name="age" required/>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Проект</label>
+              <div class="col-sm-9">
+                <select class="form-select mb-3" name="project_name" required>
+                  <option selected disabled>Выберите проект</option>
+                  {% for project in projects %}
+                  <option value="{{project.project}}">{{project.project}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Почта</label>
+              <div class="col-sm-9">
+                <input type="email" name="email" id="EmailField" class="form-control" placeholder="Почта сотрудника"
+                  required />
+                <div class="EmailFeedbackArea invalid-feedback invalid_feedback" style="display:none"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Отдел</label>
+              <div class="col-sm-9">
+                <select class="form-select mb-3" name="department" required>
+                  <option selected disabled>Выберите отдел</option>
+                  {% for o in obj %}
+                  <option value="{{o.dept}}">{{o.dept}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <input type="submit" class="submit-btn btn btn-primary" value="Добавить сотрудника" />
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+<script src="{%  static 'js/app.js' %}"></script>
+<script src="{%  static 'js/AddEmployee.js' %} "></script>
+
+{% endblock AdminDashboard %}
